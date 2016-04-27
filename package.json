@@ -1,0 +1,26 @@
+{
+  "name": "kue-example",
+  "version": "0.0.1",
+  "description": "kue example",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miknonny/kue-example.git"
+  },
+  "keywords": [
+    "kue"
+  ],
+  "author": "mbah michael <miknonny@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/miknonny/kue-example/issues"
+  },
+  "homepage": "https://github.com/miknonny/kue-example#readme",
+  "dependencies": {
+    "express": "4.13.4",
+    "kue": "0.10.5"
+  }
+}
