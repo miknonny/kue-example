@@ -1,6 +1,8 @@
 const kue = require('kue')
 
-const queue = kue.createQueue()
+const queue = kue.createQueue({
+  redis: 'redis://:showdown22@pub-redis-11790.us-east-1-1.1.ec2.garantiadata.com:11790'
+})
 
 // one minute
 const minute = 60000
@@ -13,6 +15,8 @@ const createJob = () => {
     template: 'renewal-email'
   }).delay(minute)
     .priority('high')
+    .attempts(5)
+    .removeOnComplete(true)
     .save()
 }
 
@@ -21,18 +25,11 @@ createJob()
 
 // Remove the job on completed and create job again.
 queue.on('job complete', (id, result) => {
-  kue.Job.get(id, (err, job) => {
-    if (err) return;
-    job.remove(err => {
-      if (err) throw err;
-      console.log(`removed completed job ${job.id}`)
-    })
-  })
   createJob()
 })
 
-// queue.process will always be called to handle jobs.
-queue.process('email', 10, (job, done) => {
+// queue.process will always be called to handle jobs when ever delay expires.
+queue.process('email', 1, (job, done) => {
   console.log(job.data)
   setTimeout(() => {
     done()
