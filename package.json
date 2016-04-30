@@ -21,6 +21,8 @@
   "homepage": "https://github.com/miknonny/kue-example#readme",
   "dependencies": {
     "express": "4.13.4",
-    "kue": "0.10.5"
+    "kue": "0.10.5",
+    "mailgun-js": "0.7.10",
+    "parse": "1.8.3"
   }
 }
